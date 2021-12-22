@@ -3,9 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import './index.css'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
+
+Vue.use(axios)
 
 axios.interceptors.response.use(undefined, function(error) {
   if (error) {

@@ -1,71 +1,55 @@
 <template>
-  <div class="container">
-    <div v-if="User">
-      <p>Hi {{ User }}</p>
-    </div>
-    <div>
-      <form @submit.prevent="submit">
-        <div>
-          <label for="title">Title:</label>
-          <input type="text" name="title" v-model="form.title" />
-        </div>
-        <div>
-          <textarea
-            name="write_up"
-            v-model="form.write_up"
-            placeholder="Write up..."
-          ></textarea>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div class="posts" v-if="Profile">
-      <ul>
-        <li v-for="profile in Profile" :key="profile.id">
-          <div id="post-div">
-            <p>{{ post.title }}</p>
-            <p>{{ post.write_up }}</p>
-            <p>Written By: {{ post.author.username }}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div v-else>Oh no!!! We have no posts</div>
-  </div>
+  <div></div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-
+import { mapState } from 'vuex'
+import axios from 'axios'
 export default {
-  name: "Profile",
-  components: {},
-  data() {
+  data () {
     return {
-      form: {
-        title: "",
-        write_up: "",
-      },
-    };
-  },
-  created: function() {
-    // a function to call getposts action
-    this.GetProfile()
+      firstname: null,
+      lastname: null,
+      picture: null,
+    }
   },
   computed: {
-    ...mapGetters({ Profile: "StateProfile", User: "StateUser" }),
+    ...mapState([
+      'profile',
+    ]),
   },
   methods: {
-    ...mapActions(["CreatePost", "GetPosts"]),
-    async submit() {
-      try {
-        await this.CreatePost(this.form);
-      } catch (error) {
-        throw "Sorry you can't make a post now!"
-      }
+    handleInputFile (e) {
+      this.picture = e.target.files[0]
     },
-  },
-};
+    submit () {
+      if (this.firstname != null && this.lastname != null) {
+        axios.put('https://api-moshop.molengeek.pro/api/v1/user',
+          {
+            firstname: this.firstname,
+            lastname: this.lastname,
+          },
+          {
+            headers: {
+              'Authorization': 'Bearer ' + this.$store.state.authToken,
+            }
+          })
+      }
+      if (this.picture != null) {
+        let formData = new FormData();
+        formData.append("picture", this.picture)
+        axios.put('https://api-moshop.molengeek.pro/api/v1/user/picture',
+          formData,
+          {
+            headers: {
+              'Authorization': 'Bearer ' + this.$store.state.authToken,
+            }
+          },
+        )
+      }
+    }
+  }
+}
 </script>
 <style scoped>
 * {
