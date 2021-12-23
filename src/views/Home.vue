@@ -3,6 +3,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/>
       <div>
       <div class="cart_list">
+        
         <div >
           <div class="cart_item"  v-for="food in shop"
       :key="food.id">
@@ -10,6 +11,7 @@
             <span>{{ food.name }}</span>
             <span>Description: {{ food.description }}</span>
             <span> {{food.price }} €</span>
+            
             <div>
               <button
                 type="button"

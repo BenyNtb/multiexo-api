@@ -11,7 +11,7 @@
         <div class="flex items-center space-x-6" v-if="authToken != null">
             <Profile />
         </div>
-        <Login  />
+        <!-- <Login  /> -->
     </nav>
 </template>
 
