@@ -18,6 +18,7 @@
                 <h1 class="logo-title">
                   <span>Mo</span>
                   <span>Shop</span>
+                  <h1>Test</h1>
                 </h1>
             </router-link>    
             </div>
