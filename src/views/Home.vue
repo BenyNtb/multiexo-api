@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
       <div>
       <div class="cart_list">
         
@@ -36,13 +35,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
   import axios from 'axios'
 export default {
   name: 'Home',
   components: {
-    HelloWorld
   },
   data () {
     return {

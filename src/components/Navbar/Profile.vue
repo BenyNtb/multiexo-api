@@ -85,9 +85,6 @@
           <div class="app-body-main-content">
             <section class="service-section">
               <h2>Profile</h2>
-              <div class="service-section-header">
-                
-              </div>
               <div class="mobile-only">
                 <button class="flat-button">
                   Toggle search
